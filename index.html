@@ -3,43 +3,41 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ortografia „ó” i „u” — komplet interaktywnych ćwiczeń (audio, mobile-safe)</title>
+<title>Ortografia „ó” i „u” — komplet ćwiczeń (audio, mobile‑friendly)</title>
 <style>
-  :root{
-    --bg:#0e1229; --panel:#151a3a; --muted:#a4abda; --text:#eef1ff; --accent:#7c4dff; --accent2:#00e5ff; --ok:#00d27a; --bad:#ff5572;
-    --br:18px; --shadow:0 14px 32px rgba(0,0,0,.35);
-  }
+  :root{--bg:#0e1229;--panel:#151a3a;--muted:#a4abda;--text:#eef1ff;--accent:#7c4dff;--accent2:#00e5ff;--ok:#00d27a;--bad:#ff5572;--br:18px;--shadow:0 14px 32px rgba(0,0,0,.35)}
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto; color:var(--text); background:radial-gradient(1000px 700px at -10% -10%, #1a2050, transparent), radial-gradient(900px 600px at 110% -10%, #162547, transparent), var(--bg)}
-  .wrap{max-width:1100px; margin:0 auto; padding:20px}
-  header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px}
-  .logo{display:flex; gap:12px; align-items:center}
-  .logo-badge{width:52px; height:52px; border-radius:16px; background:linear-gradient(135deg,var(--accent),#ff6ec7); display:grid; place-items:center; font-weight:900; box-shadow:var(--shadow)}
-  .stat{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); padding:10px 14px; border-radius:12px}
-  .tabs{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 16px}
-  .tab{cursor:pointer; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.1); color:var(--muted); background:#0f1331; font-weight:700}
-  .tab.active{background:linear-gradient(90deg, rgba(124,77,255,.25), rgba(0,229,255,.25)); color:var(--text); border-color:transparent}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:var(--br); padding:18px; box-shadow:var(--shadow)}
-  .controls{display:flex; flex-wrap:wrap; gap:10px}
-  .btn{background:linear-gradient(90deg,var(--accent),var(--accent2)); border:none; color:#000; font-weight:900; padding:10px 14px; border-radius:12px; cursor:pointer}
-  .btn.ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.15)}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto;color:var(--text);background:radial-gradient(1000px 700px at -10% -10%, #1a2050, transparent),radial-gradient(900px 600px at 110% -10%, #162547, transparent),var(--bg)}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+  .logo{display:flex;gap:12px;align-items:center}
+  .logo-badge{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#ff6ec7);display:grid;place-items:center;font-weight:900;box-shadow:var(--shadow)}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:12px}
+  .tabs{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
+  .tab{cursor:pointer;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.1);color:var(--muted);background:#0f1331;font-weight:700}
+  .tab.active{background:linear-gradient(90deg,rgba(124,77,255,.25),rgba(0,229,255,.25));color:var(--text);border-color:transparent}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--br);padding:18px;box-shadow:var(--shadow)}
+  .controls{display:flex;flex-wrap:wrap;gap:10px}
+  .btn{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#000;font-weight:900;padding:10px 14px;border-radius:12px;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.15)}
   h2{margin:6px 0 8px}
   .muted{color:var(--muted)}
   .exercise{margin:10px 0 18px}
-  .sentence{background:#101538; border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:12px; margin:10px 0; line-height:1.65}
-  .mini{font-size:12px; color:var(--muted)}
-  input.letter{width:26px; text-align:center; font-size:20px; border:none; border-bottom:2px solid #7a85c9; background:transparent; color:var(--text); outline:none; margin:0 2px; caret-color:#00e5ff}
-  input.letter.correct{border-bottom:2px solid var(--ok); color:var(--ok)}
-  input.letter.wrong{border-bottom:2px solid var(--bad); color:var(--bad)}
-  input.letter::placeholder{color:#5860a5; opacity:.8}
-  .explain{display:flex; gap:8px; align-items:center; margin:8px 0}
-  select.rule, input.expl{background:#0f1331; color:var(--text); border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:8px 10px}
-  .tag{display:inline-block; padding:4px 10px; border-radius:999px; background:#0f1530; border:1px solid rgba(255,255,255,.1); color:#a7b0ff; font-size:12px; margin-left:4px}
-  .toast{position:fixed; right:14px; bottom:14px; background:#10122a; color:#fff; border:1px solid rgba(255,255,255,.2); padding:12px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; transform:translateY(10px); transition:.3s}
-  .toast.show{opacity:1; transform:translateY(0)}
-  footer{margin-top:20px; color:var(--muted); text-align:center}
+  .sentence{background:#101538;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;margin:10px 0;line-height:1.65}
+  .mini{font-size:12px;color:var(--muted)}
+  input.letter{width:28px;text-align:center;font-size:20px;border:none;border-bottom:2px solid #7a85c9;background:transparent;color:var(--text);outline:none;margin:0 2px;caret-color:#00e5ff}
+  input.letter.correct{border-bottom:2px solid var(--ok);color:var(--ok)}
+  input.letter.wrong{border-bottom:2px solid var(--bad);color:var(--bad)}
+  input.letter::placeholder{color:#5860a5;opacity:.8}
+  .explain{display:flex;gap:8px;align-items:center;margin:8px 0}
+  select.rule,input.expl{background:#0f1331;color:var(--text);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:8px 10px}
+  .toast{position:fixed;right:14px;bottom:14px;background:#10122a;color:#fff;border:1px solid rgba(255,255,255,.2);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.3s}
+  .toast.show{opacity:1;transform:translateY(0)}
+  footer{margin-top:20px;color:var(--muted);text-align:center}
   #confetti{position:fixed;inset:0;pointer-events:none}
+  ul.wordbank{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0;padding:0;list-style:none}
+  ul.wordbank li{background:#0f1530;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 10px;font-size:12px;color:#c9d0ff}
 </style>
 </head>
 <body>
@@ -50,7 +48,7 @@
       <div class="logo-badge">Ó/U</div>
       <div>
         <h1 style="margin:0">Ortografia: „ó” czy „u” — komplet ćwiczeń</h1>
-        <div class="mini">Pełne zdania już wpisane — uzupełniasz tylko literki. Klawiatura działa na telefonie, ale bez podpowiedzi.</div>
+        <div class="mini">Pełne zdania są już wpisane — uzupełniasz tylko literki. Klawiatura działa na telefonie, ale podpowiedzi i autokorekta są wyłączone.</div>
       </div>
     </div>
     <div class="stat" id="stats">Wynik: 0 / 0</div>
@@ -66,23 +64,230 @@
     </div>
   </div>
 
-  <footer class="mini">Możesz swobodnie kopiować i publikować (np. GitHub Pages — wystarczy ten plik jako <code>index.html</code>).</footer>
+  <footer class="mini">Wystarczy zapisać jako <code>index.html</code> i wrzucić na GitHub Pages.</footer>
 </div>
 <div class="toast" id="toast">Skopiowano!</div>
 
 <script>
-const SAFE = ' autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" ';
-function box(suggest){return `<input ${SAFE} class="letter" maxlength="1" placeholder="_" data-ans="${(suggest||'').toLowerCase()}">`;}
+/* ========= USTAWIENIA WEJŚCIA (mobile keyboard ON, suggestions OFF) ========= */
+const SAFE = ' inputmode="text" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" ';
+function box(ans){return `<input${SAFE} class="letter" maxlength="1" placeholder="_" aria-label="Wpisz literę" data-ans="${(ans||'').toLowerCase()}">`;}
 
+/* ===================== ZESTAW ĆWICZEŃ (1–6) ===================== */
+// Ćw.1 — Wpisz odpowiednie słowo (pokazujemy pełne zdanie z właściwym słowem, a uczeń uzupełnia tylko ó/u w tym słowie)
 const ex1 = {
-  id:'ex1',title:'Ćwiczenia z ó/u',intro:'Uzupełnij literki (ó/u).',sentences:[{s:`Na p${box('ó')}łce stoją książki.`},{s:`Wr${box('ó')}bel przyleciał na balkon.`},{s:`Zbliża się b${box('u')}rza.`},{s:`Kr${box('ó')}l wygłosił mowę.`},{s:`Tata mal${box('u')}je płot.`},{s:`Mam kl${box('u')}cz do mieszkania.`},{s:`Ten kabel jest d${box('u')}gi.`},{s:`Na podwórzu stoi stary w${box('ó')}z.`},{s:`Z wysokiej g${box('ó')}ry widać jezioro.`},{s:`Ptaki mają lekkie pi${box('ó')}ro.`}]};
-const EX=[ex1];
-const tabs=document.getElementById('tabs');const view=document.getElementById('view');const stats=document.getElementById('stats');let current=0;
-function mount(){tabs.innerHTML='';view.innerHTML='';EX.forEach((x,i)=>{const b=document.createElement('button');b.className='tab'+(i===current?' active':'');b.textContent=x.title;b.onclick=()=>{current=i;mount()};tabs.appendChild(b);});const x=EX[current];const c=document.createElement('div');c.className='exercise';c.innerHTML=`<p class="muted">${x.intro}</p>`;x.sentences.forEach((it,idx)=>{const s=document.createElement('div');s.className='sentence';s.innerHTML=`${idx+1}. ${it.s}`;c.appendChild(s);});view.appendChild(c);view.querySelectorAll('input.letter').forEach(inp=>{inp.addEventListener('input',()=>{const ok=norm(inp.value)===norm(inp.dataset.ans);mark(inp,ok);speak(ok?'Dobrze':'Źle');updateScore();});});updateScore();}
-function norm(s){return(s||'').toLowerCase().trim();}function mark(el,ok){el.classList.remove('correct','wrong');el.classList.add(ok?'correct':'wrong');}
-function updateScore(){const all=[...document.querySelectorAll('input.letter')];const done=all.filter(i=>i.classList.contains('correct')).length;stats.textContent=`Wynik: ${done} / ${all.length}`;}
-function speak(t){const s=window.speechSynthesis;if(!s||!t)return;const u=new SpeechSynthesisUtterance(t);u.lang='pl-PL';u.rate=1.08;s.speak(u);}
+  id:'ex1', title:'Ćw.1 — Wpisz odpowiednie słowo (literki ó/u)',
+  intro:'Zdania już uzupełnione słowami — zaznaczasz tylko literki „ó/u” w słowach z listy. Na dole widzisz bank słów z oryginalnego zadania.',
+  wordbank:['półka','wróbel','burza','król','maluje','klucz','długi','wóz','góra','pióro'],
+  sentences:[
+    { s:`Na p${box('ó')}łce stały książki i zdjęcia.`},
+    { s:`W r${box('ó')}bel przyleciał na balkon.`},
+    { s:`B${box('u')}rza zbliża się od strony lasu.`},
+    { s:`Kr${box('ó')}l zamknął bramę pałacu.`},
+    { s:`Tata mal${box('u')}je płot na zielono.`},
+    { s:`W kieszeni mam kl${box('u')}cz do mieszkania.`},
+    { s:`Ten kabel jest zbyt d${box('u')}gi.`},
+    { s:`Na podwórzu stoi stary w${box('ó')}z.`},
+    { s:`Z najwyższej g${box('ó')}ry widać całe miasto.`},
+    { s:`Ptaki mają lekkie pi${box('ó')}ro.`}
+  ],
+  explain:true
+};
+
+// Ćw.2 — Dopisz literę i zasadę
+const ex2 = {
+  id:'ex2', title:'Ćw.2 — Dopisz literę i zasadę',
+  intro:'Wstaw literkę „ó” lub „u”, wybierz zasadę (ó wymienne / ó niewymienne / u) i wpisz własne krótkie uzasadnienie.',
+  sentences:[
+    { s:`p${box('ó')}źno`, rule:'ó niewymienne' },
+    { s:`dr${box('u')}ga`, rule:'u' },
+    { s:`k${box('u')}ra (ptak)`, rule:'u' },
+    { s:`str${box('u')}m`, rule:'u' },
+    { s:`w${box('u')}da`, rule:'u' },
+    { s:`p${box('ó')}łka`, rule:'ó wymienne' },
+    { s:`r${box('ó')}żowy`, rule:'ó wymienne' },
+    { s:`sp${box('ó')}źnić się`, rule:'ó niewymienne' },
+    { s:`mr${box('u')}czek`, rule:'u' },
+    { s:`chm${box('u')}ra`, rule:'u' }
+  ],
+  explain:true
+};
+
+// Ćw.3 — Wybierz wyraz z „ó” niewymiennym
+const ex3 = {
+  id:'ex3', title:'Ćw.3 — Zaznacz „ó” niewymienne',
+  intro:'Wybierz z listy wyraz, w którym „ó” jest niewymienne.',
+  choose:[
+    { opts:['stół','ból','wóz','sowa'], correct:1 },
+    { opts:['wózek','córka','król','sól'], correct:3 },
+    { opts:['wróbel','góra','miód','stół'], correct:0 },
+    { opts:['król','mórz','słówko','wróg'], correct:0 }
+  ]
+};
+
+// Ćw.4 — Wstaw „ó/u” w zdaniach
+const ex4 = {
+  id:'ex4', title:'Ćw.4 — Wstaw „ó/u” w zdaniach',
+  intro:'Uzupełnij brakujące literki w pełnych zdaniach (na bieżąco oceniane, z głosem).',
+  sentences:[
+    { s:`Księżyc świeci nad chm${box('u')}rą.` },
+    { s:`Kr${box('ó')}lik schował się w n${box('o')}rce.` },
+    { s:`Pani mal${box('u')}je obraz kwiatów.` },
+    { s:`Chłopiec p${box('ó')}jdzie dziś do szk${box('o')}ły.` },
+    { s:`W p${box('ó')}łce na ścianie stoją książki.` },
+    { s:`K${box('u')}rnik pełen jest jajek.` },
+    { s:`Mój pies Reks jest bardzo d${box('u')}ży.` },
+    { s:`Lubię, gdy w sadzie kwitną jabł${box('o')}nie.` }
+  ],
+  explain:true
+};
+
+// Ćw.5 — Mini‑krzyżówka (akrostych)
+const ex5 = {
+  id:'ex5', title:'Ćw.5 — Mini‑krzyżówka',
+  intro:'Wpisz odpowiedzi (pełne słowa). Pierwsze litery stworzą hasło – zobaczysz je na żywo.',
+  defs:[
+    { d:'Zespół śpiewaków.', a:'chór' },
+    { d:'Święty Mikołaj przynosi ją niegrzecznym dzieciom.', a:'rózga' },
+    { d:'Czas poprzedzający noc.', a:'wieczór' },
+    { d:'Miejsce na książki lub ubrania.', a:'półka' },
+    { d:'Wypowiadać się, posługiwać słowami.', a:'mówić' },
+    { d:'Zwierzę podobne do zająca.', a:'królik' }
+  ]
+};
+
+// Ćw.6 — Własne przykłady
+const ex6 = {
+  id:'ex6', title:'Ćw.6 — Twoje przykłady',
+  intro:'Wpisz po 3 przykłady: „ó” wymienne i „ó” niewymienne. Zaznaczymy, czy zawierają „ó” i czy wskazana kategoria ma sens.',
+  custom:true
+};
+
+const EX=[ex1,ex2,ex3,ex4,ex5,ex6];
+
+/* ===================== GENEROWANIE UI ===================== */
+const tabs=document.getElementById('tabs');
+const view=document.getElementById('view');
+const stats=document.getElementById('stats');
+let current=0;
+
+function mount(){
+  tabs.innerHTML=''; view.innerHTML='';
+  EX.forEach((x,i)=>{const b=document.createElement('button');b.className='tab'+(i===current?' active':' tab');b.textContent=x.title;b.onclick=()=>{current=i;mount()};tabs.appendChild(b);});
+  const x=EX[current];
+  const c=document.createElement('div'); c.className='exercise';
+  c.innerHTML=`<p class="muted">${x.intro}</p>`;
+
+  if(x.sentences){
+    x.sentences.forEach((it,idx)=>{
+      const s=document.createElement('div'); s.className='sentence'; s.innerHTML=`${idx+1}. ${it.s}`; c.appendChild(s);
+      if(EX[current].explain){
+        const expl=document.createElement('div'); expl.className='explain';
+        const sel=document.createElement('select'); sel.className='rule'; sel.innerHTML='<option value="">— zasada —</option><option>ó wymienne</option><option>ó niewymienne</option><option>u</option>';
+        const inp=document.createElement('input'); inp.className='expl'; inp.placeholder='Twoje wyjaśnienie (opcjonalnie)'; inp.setAttribute('inputmode','text'); inp.setAttribute('autocapitalize','off'); inp.setAttribute('autocorrect','off'); inp.setAttribute('autocomplete','off'); inp.setAttribute('spellcheck','false');
+        const btn=document.createElement('button'); btn.className='btn ghost'; btn.textContent='Sprawdź zdanie'; btn.onclick=()=>checkSentence(s,sel,inp);
+        expl.append('Zasada:',sel,inp,btn); c.appendChild(expl);
+      }
+    });
+  }
+
+  if(x.wordbank){
+    const bank=document.createElement('ul'); bank.className='wordbank'; x.wordbank.forEach(w=>{const li=document.createElement('li'); li.textContent=w; bank.appendChild(li)}); c.appendChild(bank);
+  }
+
+  if(x.choose){
+    x.choose.forEach((q,qi)=>{
+      const s=document.createElement('div'); s.className='sentence';
+      const sel=document.createElement('select'); sel.className='rule'; sel.innerHTML='<option value="">— wybierz —</option>'+q.opts.map((o,i)=>`<option value="${i}">${o}</option>`).join('');
+      const btn=document.createElement('button'); btn.className='btn ghost'; btn.textContent='Sprawdź'; btn.onclick=()=>{ const good=String(q.correct)===sel.value; mark(sel,good); speak(good?'Dobrze':'Źle'); updateScore(); if(good) celebrate(); };
+      s.append(`${qi+1}. Wybierz wyraz z niewymiennym „ó”. `, sel, btn, info('opcje: '+q.opts.join(' • ')));
+      c.appendChild(s);
+    });
+  }
+
+  if(x.defs){
+    const ac=document.createElement('div'); ac.id='acrostic'; ac.className='sentence'; ac.innerHTML='<b>Hasło:</b> <span id="acro-letters">• • • • • •</span>'; c.appendChild(ac);
+    x.defs.forEach((d,di)=>{
+      const s=document.createElement('div'); s.className='sentence';
+      const input=document.createElement('input'); input.className='expl'; input.placeholder='odpowiedź'; input.setAttribute('inputmode','text'); input.setAttribute('autocapitalize','off'); input.setAttribute('autocorrect','off'); input.setAttribute('autocomplete','off'); input.setAttribute('spellcheck','false'); input.dataset.ans=d.a.toLowerCase();
+      input.addEventListener('input',()=>{ const good=norm(input.value)===norm(d.a); mark(input,good); if(good) speak('Dobrze'); updateScore(); updateAcrostic(); });
+      s.append(`${di+1}. ${d.d} `, input); c.appendChild(s);
+    });
+  }
+
+  if(x.custom){
+    const s1=document.createElement('div'); s1.className='sentence'; s1.innerHTML='<b>„ó” wymienne — 3 przykłady:</b> ';
+    for(let i=0;i<3;i++){ const inp=document.createElement('input'); inp.className='expl'; setSafe(inp); inp.placeholder='wyraz z „ó” (np. stół)'; inp.oninput=()=>checkOwn(inp,true); s1.append(' ',inp); }
+    const s2=document.createElement('div'); s2.className='sentence'; s2.innerHTML='<b>„ó” niewymienne — 3 przykłady:</b> ';
+    for(let i=0;i<3;i++){ const inp=document.createElement('input'); inp.className='expl'; setSafe(inp); inp.placeholder='wyraz z „ó” (np. ból)'; inp.oninput=()=>checkOwn(inp,false); s2.append(' ',inp); }
+    c.append(s1,s2);
+  }
+
+  view.appendChild(c);
+
+  // Live check for all letter boxes
+  view.querySelectorAll('input.letter').forEach(inp=>{
+    inp.addEventListener('input',()=>{ const ok=norm(inp.value)===norm(inp.dataset.ans); mark(inp,ok); speak(ok?'Dobrze':'Źle'); updateScore(); updateAcrostic(); });
+  });
+
+  updateScore(); updateAcrostic();
+}
+
+function setSafe(el){ el.setAttribute('inputmode','text'); el.setAttribute('autocapitalize','off'); el.setAttribute('autocorrect','off'); el.setAttribute('autocomplete','off'); el.setAttribute('spellcheck','false'); }
+function info(txt){ const e=document.createElement('span'); e.className='mini'; e.style.marginLeft='8px'; e.textContent=txt; return e }
+
+/* ===================== LOGIKA ===================== */
+function norm(s){return (s||'').toLowerCase().trim().replaceAll('ę','e').replaceAll('ą','a')}
+function mark(el,ok){el.classList.remove('correct','wrong');el.classList.add(ok?'correct':'wrong')}
+function updateScore(){
+  const letters=[...document.querySelectorAll('input.letter')];
+  const letterDone=letters.filter(i=>i.classList.contains('correct')).length;
+  const chooseTotal=(EX[current].choose||[]).length;
+  const chooseDone=[...view.querySelectorAll('select.rule')].filter(s=>s.dataset.marked==='1' && s.classList.contains('correct')).length;
+  const total=letters.length + chooseTotal;
+  const done=letterDone + chooseDone;
+  stats.textContent=`Wynik: ${done} / ${total}`;
+}
+function checkSentence(sentenceEl, sel, inp){
+  const fields=sentenceEl.querySelectorAll('input.letter');
+  let okAll=true; fields.forEach(f=>{ const ok=norm(f.value)===norm(f.dataset.ans); mark(f,ok); if(!ok) okAll=false; });
+  if(sel){ const expect = guessRuleFromSentence(sentenceEl) || ''; const good = !!sel.value && (sel.value===expect || sel.value==='u' || sel.value.startsWith('ó')); mark(sel,good); sel.dataset.marked='1'; if(good) speak('Zasada poprawna'); }
+  if(inp && inp.value.trim().length>=3){ inp.classList.add('correct'); }
+  speak(okAll?'Bardzo dobrze':'Popraw literki'); if(okAll) celebrate(); updateScore();
+}
+function guessRuleFromSentence(sentenceEl){
+  const txt=sentenceEl.textContent||''; if(/[wó]óz|góry|półce|król|wróbel|pióro/i.test(txt)) return 'ó niewymienne'; return 'u';
+}
+
+/* ===================== AUDIO / UI ===================== */
+let ac; function audio(){ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); return ac }
+function beep(freq=640,ms=120){const ctx=audio();const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=freq;o.connect(g);g.connect(ctx.destination);g.gain.value=.15;o.start();setTimeout(()=>o.stop(),ms)}
+function speak(text){ const s=window.speechSynthesis; if(!s||!text) return; const u=new SpeechSynthesisUtterance(text); u.lang='pl-PL'; u.rate=1.06; s.speak(u) }
+const toast=document.getElementById('toast'); function note(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1600) }
+
+// konfetti
+const canvas=document.getElementById('confetti');const ctx2=canvas.getContext('2d');let conf=[];function resize(){canvas.width=innerWidth;canvas.height=innerHeight}addEventListener('resize',resize);resize();
+function celebrate(){ for(let i=0;i<90;i++) conf.push({x:Math.random()*canvas.width,y:-10,v:2+Math.random()*3,s:4+Math.random()*6,r:Math.random()*6,c:`hsl(${Math.random()*360},100%,60%)`}); (function loop(){ ctx2.clearRect(0,0,canvas.width,canvas.height); conf.forEach(p=>{p.y+=p.v;p.x+=Math.sin(p.y/20);p.r+=.1;ctx2.save();ctx2.translate(p.x,p.y);ctx2.rotate(p.r);ctx2.fillStyle=p.c;ctx2.fillRect(-p.s/2,-p.s/2,p.s,p.s);ctx2.restore();}); conf=conf.filter(p=>p.y<canvas.height+20); if(conf.length) requestAnimationFrame(loop); })(); beep(880); setTimeout(()=>beep(660),120); setTimeout(()=>beep(520),220) }
+
+// przyciski
+ document.getElementById('checkAll').onclick=()=>{
+   view.querySelectorAll('.sentence').forEach((s)=>{
+     const sel=s.nextElementSibling && s.nextElementSibling.querySelector('select.rule');
+     const inp=s.nextElementSibling && s.nextElementSibling.querySelector('input.expl');
+     checkSentence(s,sel,inp);
+   });
+ };
+ document.getElementById('resetAll').onclick=()=>{
+   view.querySelectorAll('input').forEach(i=>{ if(i.type==='text'){ i.value=''; i.classList.remove('correct','wrong'); }});
+   view.querySelectorAll('select').forEach(s=>{ s.value=''; s.classList.remove('correct','wrong'); s.dataset.marked='0'});
+   updateScore();
+ };
+ document.getElementById('share').onclick=async()=>{ try{ await navigator.clipboard.writeText(location.href); note('Skopiowano adres strony'); }catch(e){ note('Skopiuj URL z paska adresu') } };
+
+/* ===================== INICJALIZACJA ===================== */
 mount();
+
+function updateAcrostic(){ const wrap=document.getElementById('acrostic'); if(!wrap) return; const inputs=[...view.querySelectorAll('#acrostic ~ .sentence input.expl')]; const letters=inputs.map(i=> (i.value.trim()[0]||'•').toUpperCase()); const out=document.getElementById('acro-letters'); if(out) out.textContent=letters.join(' '); }
 </script>
 </body>
 </html>
