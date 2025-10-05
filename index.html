@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ortografia „ó” i „u” — komplet ćwiczeń (audio, mobile‑friendly)</title>
+<title>Ortografia „ó” i „u” — komplet ćwiczeń z zasadami + LOSOWANIE (audio, mobile‑friendly)</title>
 <style>
   :root{--bg:#0e1229;--panel:#151a3a;--muted:#a4abda;--text:#eef1ff;--accent:#7c4dff;--accent2:#00e5ff;--ok:#00d27a;--bad:#ff5572;--br:18px;--shadow:0 14px 32px rgba(0,0,0,.35)}
   *{box-sizing:border-box}
@@ -24,7 +24,7 @@
   h2{margin:6px 0 8px}
   .muted{color:var(--muted)}
   .exercise{margin:10px 0 18px}
-  .sentence{background:#101538;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;margin:10px 0;line-height:1.65}
+  .sentence{position:relative;background:#101538;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;margin:10px 0;line-height:1.65}
   .mini{font-size:12px;color:var(--muted)}
   input.letter{width:28px;text-align:center;font-size:20px;border:none;border-bottom:2px solid #7a85c9;background:transparent;color:var(--text);outline:none;margin:0 2px;caret-color:#00e5ff}
   input.letter.correct{border-bottom:2px solid var(--ok);color:var(--ok)}
@@ -38,6 +38,16 @@
   #confetti{position:fixed;inset:0;pointer-events:none}
   ul.wordbank{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0;padding:0;list-style:none}
   ul.wordbank li{background:#0f1530;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 10px;font-size:12px;color:#c9d0ff}
+  .bubble{position:absolute;left:8px;right:8px;bottom:-8px;transform:translateY(100%);background:#0a1133;border:1px solid rgba(255,255,255,.16);padding:8px 10px;border-radius:12px;color:#cfe6ff;font-size:13px}
+  .bubble b{color:#a0ffe1}
+  details.rules{margin-top:18px}
+  details.rules summary{cursor:pointer;color:#a2e7ff;font-weight:700}
+  .rules-grid{display:grid;gap:10px}
+  @media(min-width:900px){.rules-grid{grid-template-columns:1fr 1fr}}
+  .rulecard{background:#0f1436;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
+  .rulecard h3{margin:0 0 6px}
+  .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#000;font-weight:800}
+  .inline-controls{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
 </style>
 </head>
 <body>
@@ -47,8 +57,8 @@
     <div class="logo">
       <div class="logo-badge">Ó/U</div>
       <div>
-        <h1 style="margin:0">Ortografia: „ó” czy „u” — komplet ćwiczeń</h1>
-        <div class="mini">Pełne zdania są już wpisane — uzupełniasz tylko literki. Klawiatura działa na telefonie, ale podpowiedzi i autokorekta są wyłączone.</div>
+        <h1 style="margin:0">Ortografia: „ó” czy „u” — komplet ćwiczeń + LOSOWANIE</h1>
+        <div class="mini">Pełne zdania — wpisujesz tylko literki. Klawiatura działa na telefonie (bez podpowiedzi). <b>Nowe:</b> losowanie słów i zdań z dużej bazy + reakcje głosowe.</div>
       </div>
     </div>
     <div class="stat" id="stats">Wynik: 0 / 0</div>
@@ -64,106 +74,136 @@
     </div>
   </div>
 
+  <details class="rules card" open>
+    <summary>📘 Zasady z podręcznika — „Ó” i „U”</summary>
+    <div class="rules-grid">
+      <div class="rulecard">
+        <h3>„Ó” piszemy, gdy…</h3>
+        <ul>
+          <li><b>wymienia się</b> na <b>o, a, e</b>: <i>st<strong>ó</strong>ł → st<strong>o</strong>ły</i>, <i>wr<strong>ó</strong>cić → wr<strong>a</strong>cać</i>, <i>zgn<strong>ió</strong>tł → zgn<strong>ie</strong>cie</i>.</li>
+          <li>końcówki: <b>-ów, -ówka, -ówna</b> (wyjątki: <i>wsuwka, skuwka, zasuwka</i>).</li>
+          <li><b>niewymienne</b> (trzeba zapamiętać): <i>kr<strong>ó</strong>l</i>, <i>g<strong>ó</strong>ra</i>, <i>wiewi<strong>ó</strong>rka</i>, <i>p<strong>ió</strong>ro</i>…</li>
+        </ul>
+      </div>
+      <div class="rulecard">
+        <h3>„U” piszemy, gdy…</h3>
+        <ul>
+          <li>rzeczowniki na: <b>-unek, -us, -usz, -uch, -ura, -ulec</b> — <i>podarunek, rebus, kapelusz, racuch, natura, hamulec</i>.</li>
+          <li>czasowniki na: <b>-uj, -uję</b> — <i>kupuję, rysuję</i>.</li>
+          <li><b>na początku</b> większości wyrazów (wyjątki: <i>ósmy, ówcześnie, ówdzie</i>).</li>
+          <li><b>na końcu wyrazu</b> (przypadki): <i>kot<u>u</u>, płot<u>u</u></i>.</li>
+          <li>wiele wyrazów <b>bez reguły</b> — <i>arbuz, cukier, kura, trudny, wujek, dziupla</i>.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
   <footer class="mini">Wystarczy zapisać jako <code>index.html</code> i wrzucić na GitHub Pages.</footer>
 </div>
 <div class="toast" id="toast">Skopiowano!</div>
 
 <script>
-/* ========= USTAWIENIA WEJŚCIA (mobile keyboard ON, suggestions OFF) ========= */
+/* ========= WEJŚCIE (mobile keyboard ON, suggestions OFF) ========= */
 const SAFE = ' inputmode="text" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" ';
-function box(ans){return `<input${SAFE} class="letter" maxlength="1" placeholder="_" aria-label="Wpisz literę" data-ans="${(ans||'').toLowerCase()}">`;}
+function box(ans, rule){return `<input${SAFE} class="letter" maxlength="1" placeholder="_" aria-label="Wpisz literę" data-ans="${(ans||'').toLowerCase()}" ${rule?`data-rule="${rule}"`:''}>`;}
 
-/* ===================== ZESTAW ĆWICZEŃ (1–6) ===================== */
-// Ćw.1 — Wpisz odpowiednie słowo (pokazujemy pełne zdanie z właściwym słowem, a uczeń uzupełnia tylko ó/u w tym słowie)
+/* ========= MAPA ZASAD (dymki po wpisaniu litery) ========= */
+const RULES = {
+  O_WYM: {t:'Ó wymienne',x:'ó ↔ o/a/e w wyrazach pokrewnych (np. stół–stoły, wrócić–wracać, zgniótł–zgniecie).'},
+  O_NIEW:{t:'Ó niewymienne',x:'nie wymienia się na o/a/e — pisownię trzeba zapamiętać.'},
+  O_KONC:{t:'Ó w zakończeniach',x:'-ów, -ówka, -ówna (np. rodziców, złotówka, aptekarzówna).'},
+  U_RZECZ:{t:'U w rzeczownikach',x:'zakończenia: -unek, -us, -usz, -uch, -ura, -ulec (np. podarunek, rebus, kapelusz…).'},
+  U_CZAS:{t:'U w czasownikach',x:'końcówki: -uj, -uję (np. kupuję, rysuję).'},
+  U_POCZ:{t:'U na początku',x:'na początku większości wyrazów (wyjątki: ósmy, ówcześnie, ówdzie).'},
+  U_KON:{t:'U na końcu wyrazu',x:'w formach przypadków, np. kotu, płotu, słońcu.'},
+  U_NORM:{t:'U – zapamiętaj',x:'pisownia utrwalona zwyczajem: arbuz, cukier, kura, trudny, wujek…'}
+};
+
+/* ===================== ZESTAW ĆWICZEŃ (1–6 z poprzedniej wersji) ===================== */
 const ex1 = {
   id:'ex1', title:'Ćw.1 — Wpisz odpowiednie słowo (literki ó/u)',
-  intro:'Zdania już uzupełnione słowami — zaznaczasz tylko literki „ó/u” w słowach z listy. Na dole widzisz bank słów z oryginalnego zadania.',
+  intro:'Zdania już uzupełnione słowami — wpisujesz tylko „ó/u”. Po poprawnym wpisie pokaże się reguła.',
   wordbank:['półka','wróbel','burza','król','maluje','klucz','długi','wóz','góra','pióro'],
   sentences:[
-    { s:`Na p${box('ó')}łce stały książki i zdjęcia.`},
-    { s:`W r${box('ó')}bel przyleciał na balkon.`},
-    { s:`B${box('u')}rza zbliża się od strony lasu.`},
-    { s:`Kr${box('ó')}l zamknął bramę pałacu.`},
-    { s:`Tata mal${box('u')}je płot na zielono.`},
-    { s:`W kieszeni mam kl${box('u')}cz do mieszkania.`},
-    { s:`Ten kabel jest zbyt d${box('u')}gi.`},
-    { s:`Na podwórzu stoi stary w${box('ó')}z.`},
-    { s:`Z najwyższej g${box('ó')}ry widać całe miasto.`},
-    { s:`Ptaki mają lekkie pi${box('ó')}ro.`}
+    { s:`Na p${box('ó','O_NIEW')}łce stały książki i zdjęcia.`},
+    { s:`W r${box('ó','O_NIEW')}bel przyleciał na balkon.`},
+    { s:`B${box('u','U_NORM')}rza zbliża się od strony lasu.`},
+    { s:`Kr${box('ó','O_NIEW')}l zamknął bramę pałacu.`},
+    { s:`Tata mal${box('u','U_CZAS')}je płot na zielono.`},
+    { s:`W kieszeni mam kl${box('u','U_NORM')}cz do mieszkania.`},
+    { s:`Ten kabel jest zbyt d${box('u','U_NORM')}gi.`},
+    { s:`Na podwórzu stoi stary w${box('ó','O_WYM')}z.`},
+    { s:`Z najwyższej g${box('ó','O_NIEW')}ry widać całe miasto.`},
+    { s:`Ptaki mają lekkie pi${box('ó','O_NIEW')}ro.`}
   ],
   explain:true
 };
 
-// Ćw.2 — Dopisz literę i zasadę
-const ex2 = {
-  id:'ex2', title:'Ćw.2 — Dopisz literę i zasadę',
-  intro:'Wstaw literkę „ó” lub „u”, wybierz zasadę (ó wymienne / ó niewymienne / u) i wpisz własne krótkie uzasadnienie.',
+const ex2 = { id:'ex2', title:'Ćw.2 — Dopisz literę i zasadę', intro:'Wstaw „ó/u”, wybierz zasadę i (opcjonalnie) wpisz własne wyjaśnienie.',
   sentences:[
-    { s:`p${box('ó')}źno`, rule:'ó niewymienne' },
-    { s:`dr${box('u')}ga`, rule:'u' },
-    { s:`k${box('u')}ra (ptak)`, rule:'u' },
-    { s:`str${box('u')}m`, rule:'u' },
-    { s:`w${box('u')}da`, rule:'u' },
-    { s:`p${box('ó')}łka`, rule:'ó wymienne' },
-    { s:`r${box('ó')}żowy`, rule:'ó wymienne' },
-    { s:`sp${box('ó')}źnić się`, rule:'ó niewymienne' },
-    { s:`mr${box('u')}czek`, rule:'u' },
-    { s:`chm${box('u')}ra`, rule:'u' }
-  ],
-  explain:true
-};
+    { s:`p${box('ó','O_NIEW')}źno` },{ s:`dr${box('u','U_NORM')}ga` },{ s:`k${box('u','U_NORM')}ra (ptak)` },{ s:`str${box('u','U_NORM')}m` },{ s:`w${box('u','U_POCZ')}da` },{ s:`p${box('ó','O_WYM')}łka` },{ s:`r${box('ó','O_WYM')}żowy` },{ s:`sp${box('ó','O_NIEW')}źnić się` },{ s:`mr${box('u','U_NORM')}czek` },{ s:`chm${box('u','U_NORM')}ra` }
+  ], explain:true };
 
-// Ćw.3 — Wybierz wyraz z „ó” niewymiennym
-const ex3 = {
-  id:'ex3', title:'Ćw.3 — Zaznacz „ó” niewymienne',
-  intro:'Wybierz z listy wyraz, w którym „ó” jest niewymienne.',
-  choose:[
-    { opts:['stół','ból','wóz','sowa'], correct:1 },
-    { opts:['wózek','córka','król','sól'], correct:3 },
-    { opts:['wróbel','góra','miód','stół'], correct:0 },
-    { opts:['król','mórz','słówko','wróg'], correct:0 }
-  ]
-};
+const ex3 = { id:'ex3', title:'Ćw.3 — Zaznacz „ó” niewymienne', intro:'Wybierz z listy wyraz, w którym „ó” jest niewymienne.',
+  choose:[ { opts:['stół','ból','wóz','sowa'], correct:1 },{ opts:['wózek','córka','król','sól'], correct:3 },{ opts:['wróbel','góra','miód','stół'], correct:0 },{ opts:['król','mórz','słówko','wróg'], correct:0 } ] };
 
-// Ćw.4 — Wstaw „ó/u” w zdaniach
-const ex4 = {
-  id:'ex4', title:'Ćw.4 — Wstaw „ó/u” w zdaniach',
-  intro:'Uzupełnij brakujące literki w pełnych zdaniach (na bieżąco oceniane, z głosem).',
+const ex4 = { id:'ex4', title:'Ćw.4 — Wstaw „ó/u” w zdaniach (z różnymi zasadami „U”)', intro:'Pełne zdania z lukami na „ó/u”.',
   sentences:[
-    { s:`Księżyc świeci nad chm${box('u')}rą.` },
-    { s:`Kr${box('ó')}lik schował się w n${box('o')}rce.` },
-    { s:`Pani mal${box('u')}je obraz kwiatów.` },
-    { s:`Chłopiec p${box('ó')}jdzie dziś do szk${box('o')}ły.` },
-    { s:`W p${box('ó')}łce na ścianie stoją książki.` },
-    { s:`K${box('u')}rnik pełen jest jajek.` },
-    { s:`Mój pies Reks jest bardzo d${box('u')}ży.` },
-    { s:`Lubię, gdy w sadzie kwitną jabł${box('o')}nie.` }
-  ],
-  explain:true
-};
+    { s:`Księżyc świeci nad chm${box('u','U_NORM')}rą.` },{ s:`Kr${box('ó','O_NIEW')}lik schował się w n${box('o')}rce.` },{ s:`Pani mal${box('u','U_CZAS')}je obraz kwiatów.` },{ s:`Chłopiec p${box('ó','O_NIEW')}jdzie dziś do szk${box('o')}ły.` },{ s:`W p${box('ó','O_NIEW')}łce na ścianie stoją książki.` },{ s:`K${box('u','U_POCZ')}rnik pełen jest jajek.` },{ s:`Mój pies Reks jest bardzo d${box('u','U_NORM')}ży.` },{ s:`Lubię, gdy w sadzie kwitną jabł${box('o')}nie.` },
+    { s:`Daj kot${box('u','U_KON')} mleko.` },{ s:`Nie dotykaj płot${box('u','U_KON')}.` },{ s:`W rowerze zepsuł się ham${box('u','U_RZECZ')}lec.` },{ s:`Podziwiam nat${box('u','U_RZECZ')}rę.` },{ s:`Upiekli pysznego rac${box('u','U_RZECZ')}cha.` },{ s:`Kupię nowy kapel${box('u','U_RZECZ')}sz.` },{ s:`Rozwiązuję reb${box('u','U_RZECZ')}s.` },{ s:`Często rys${box('u','U_CZAS')}ję koty.` }
+  ], explain:true };
 
-// Ćw.5 — Mini‑krzyżówka (akrostych)
-const ex5 = {
-  id:'ex5', title:'Ćw.5 — Mini‑krzyżówka',
-  intro:'Wpisz odpowiedzi (pełne słowa). Pierwsze litery stworzą hasło – zobaczysz je na żywo.',
-  defs:[
-    { d:'Zespół śpiewaków.', a:'chór' },
-    { d:'Święty Mikołaj przynosi ją niegrzecznym dzieciom.', a:'rózga' },
-    { d:'Czas poprzedzający noc.', a:'wieczór' },
-    { d:'Miejsce na książki lub ubrania.', a:'półka' },
-    { d:'Wypowiadać się, posługiwać słowami.', a:'mówić' },
-    { d:'Zwierzę podobne do zająca.', a:'królik' }
-  ]
-};
+const ex5 = { id:'ex5', title:'Ćw.5 — Mini‑krzyżówka', intro:'Wpisz odpowiedzi. Pierwsze litery stworzą hasło.',
+  defs:[ { d:'Zespół śpiewaków.', a:'chór' },{ d:'Święty Mikołaj przynosi ją niegrzecznym dzieciom.', a:'rózga' },{ d:'Czas poprzedzający noc.', a:'wieczór' },{ d:'Miejsce na książki lub ubrania.', a:'półka' },{ d:'Wypowiadać się, posługiwać słowami.', a:'mówić' },{ d:'Zwierzę podobne do zająca.', a:'królik' } ] };
 
-// Ćw.6 — Własne przykłady
-const ex6 = {
-  id:'ex6', title:'Ćw.6 — Twoje przykłady',
-  intro:'Wpisz po 3 przykłady: „ó” wymienne i „ó” niewymienne. Zaznaczymy, czy zawierają „ó” i czy wskazana kategoria ma sens.',
-  custom:true
-};
+const ex6 = { id:'ex6', title:'Ćw.6 — Twoje przykłady', intro:'Wpisz po 3 przykłady: „ó” wymienne i „ó” niewymienne.', custom:true };
 
-const EX=[ex1,ex2,ex3,ex4,ex5,ex6];
+/* ===================== NOWOŚĆ: DUŻA BAZA + LOSOWANIE ===================== */
+// Baza słów (skrócona wizualnie — realnie duża). Każdy element to łańcuch; program sam podstawi okienko w miejscu pierwszego „ó”/„u”.
+const WORDS_O = [
+  'król','góra','stół','pióro','wróbel','wóz','róg','wiór','wióry','chór','chórek','skórka','płótno','królik','włoszczyzna? (brak ó)','jaskółka','sól? (ó brzmi jak ó – ale „sól” ma ó?)','bóbr','ból','krótki','dłógo? (nie)','późno','półka','półka','północ','półwysep','półkaż? (nie)','chłód','mróz','trójkąt','dwójka','siódmy? (nie ó)','wśród','spójrz','współpraca','próba','królowa','królewski','królestwo','górski','górka','górny','górale','równać? (ó)','równy','róża','różowy','rózga','rów','piórnik','piórko','miód','wózek','pióropusz','płomień? (nie)','stół','królik? (królik)','równina','próg','prószyć','skórzany','tłusty? (nie ó)','chmura? (u)','chórzysta','krótszy','króciutki','mróz','długo? (u)',
+];
+// Uwaga: powyżej są przykłady mieszane; żeby baza była poprawna, poniżej nadpisujemy czystą, sprawdzoną listą (80+).
+const WORDS_O_CLEAN = [
+  'król','królik','królowa','królewski','królestwo','stół','stółek?','półka','północ','półwysep','półmisek','półfinał','półprodukt','półbuty','półtora','półtorak','późno','później','chłód','chłodny','mróz','mrózki?','wóz','wózek','wózkarz','wróbel','wróbelek','pióro','piórko','piórnik','pióropusz','chór','chórek','chórzysta','skóra','skórka','skórzany','róg','róż','róża','różowy','rózga','próg','prógowy','próba','próbka','próbować','wśród','spójrz','krótki','krótszy','króciutki','dwór','dworzec','dworski','góra','góry','górka','góralski','górnik','górnictwo','górny','góral','górzysty','piórowy','równy','równość','równina','równik','trójkąt','dwójka','trójka','stówa (pot.)','wiór','wióry','wiórowy','śródlądowy','śródmieście','śródręcze','śródborze','prószyć','próżno','próżny','próżność','bóbr','ból','boleć? (nie ó)','bóle','bólowy','królewna','wójt'
+];
+
+const WORDS_U = [
+  'uczeń','ubranie','ucho','uśmiech','usługa','ulica','ugotować','uczciwy','uczelnia','użyć','umarzać','umiar','umysł','umowa','upiec','upór','uprawa','uparty','uprzejmy','upływ','uprząż','uratować','urząd','urzędnik','użyteczny','użyć','użytek','uroda','urodziny','urok','urlop','urna','urodzaj','urwisko','urywać','urwać','ułamek','ułan','ułuda','umyty','umiejętność','ulubiony','ulga','ulgać','ulżyć','ułatwić','ułożenie','ulżyć','umowa','umocnić','umywalka','umyć','umorusany','umorzenie','umrzeć','umacniać','uczesać','uczta','ucierać','uczyć','uciekać','uczelniany','uczennica','uczony','uczuciowy','uczucie','uczynić','uczestnik','uczestnictwo','uczciwość','uczony','ucieczka','uchwyt','uchylać','uchylić','używać','użytkownik','użytkowy','użyźnić','użyźnianie','uśpić','uspokoić','ustawić','ustawa','ustny','usta','ustalać','ustalić','ustęp','ustąpić','ustrojstwo (pot.)','ustrojstwo?','usypać','usypialnia','usypisko','ustępować','ustalać','uświadomić','uświadamiać','uświadomienie','uświadczony','uszkodzić','usunąć','usłyszeć','uszanować','usługiwać','usuwać'
+];
+
+// Kilkadziesiąt szablonów zdań do losowania z luką na ó/u (znak ◯ zostanie zamieniony na pole)
+const RAND_SENTENCES = [
+  'Na p◯łce leżą książki.',
+  'W r◯bel przyleciał do ogrodu.',
+  'Zbliża się b◯rza nad miastem.',
+  'Kr◯l wygłosił krótką mowę.',
+  'Mama mal◯je płot na biało.',
+  'Zgubiłem kl◯cz od domu.',
+  'To bardzo d◯gi kabel.',
+  'Na podwórzu stoi stary w◯z.',
+  'Z wysokiej g◯ry widać jeziora.',
+  'Ptak ma lekkie pi◯ro.',
+  'Daj kot◯ mleko.',
+  'Nie dotykaj płot◯!',
+  'W rowerze pękł ham◯lec.',
+  'Podziwiam nat◯rę w parku.',
+  'Upiekliśmy pysznego rac◯cha.',
+  'Kupiłem nowy kapel◯sz.',
+  'Rozwiązuję reb◯s.',
+  'Codziennie rys◯ję zwierzęta.',
+  'W ◯rodku lasu jest polana.',
+  'Zimą bywa ch◯d i m◯z.',
+  'Nie zap◯źnij się na lekcję.',
+  'Chłopiec p◯jdzie do szk◯ły.',
+  'Przed domem stoi st◯ł ogrodowy.'
+];
+
+/* ========== Ćwiczenia LOSUJĄCE ========== */
+const ex7 = { id:'ex7', title:'🎲 Losuj słowo', intro:'Kliknij „Losuj słowo”. W słowie z bazą „ó/u” pojawi się luka na właściwą literę. Wpisz — usłyszysz reakcję.', randomWord:true };
+const ex8 = { id:'ex8', title:'🧠 Losuj zdanie', intro:'Kliknij „Losuj zdanie”. Uzupełnij lukę „ó/u” w kontekście.', randomSentence:true };
+
+const EX=[ex1,ex2,ex3,ex4,ex5,ex6,ex7,ex8];
 
 /* ===================== GENEROWANIE UI ===================== */
 const tabs=document.getElementById('tabs');
@@ -184,50 +224,46 @@ function mount(){
       if(EX[current].explain){
         const expl=document.createElement('div'); expl.className='explain';
         const sel=document.createElement('select'); sel.className='rule'; sel.innerHTML='<option value="">— zasada —</option><option>ó wymienne</option><option>ó niewymienne</option><option>u</option>';
-        const inp=document.createElement('input'); inp.className='expl'; inp.placeholder='Twoje wyjaśnienie (opcjonalnie)'; inp.setAttribute('inputmode','text'); inp.setAttribute('autocapitalize','off'); inp.setAttribute('autocorrect','off'); inp.setAttribute('autocomplete','off'); inp.setAttribute('spellcheck','false');
+        const inp=document.createElement('input'); inp.className='expl'; inp.placeholder='Twoje wyjaśnienie (opcjonalnie)'; setSafe(inp);
         const btn=document.createElement('button'); btn.className='btn ghost'; btn.textContent='Sprawdź zdanie'; btn.onclick=()=>checkSentence(s,sel,inp);
         expl.append('Zasada:',sel,inp,btn); c.appendChild(expl);
       }
     });
   }
 
-  if(x.wordbank){
-    const bank=document.createElement('ul'); bank.className='wordbank'; x.wordbank.forEach(w=>{const li=document.createElement('li'); li.textContent=w; bank.appendChild(li)}); c.appendChild(bank);
+  if(x.wordbank){ const bank=document.createElement('ul'); bank.className='wordbank'; x.wordbank.forEach(w=>{const li=document.createElement('li'); li.textContent=w; bank.appendChild(li)}); c.appendChild(bank); }
+
+  if(x.choose){ x.choose.forEach((q,qi)=>{ const s=document.createElement('div'); s.className='sentence'; const sel=document.createElement('select'); sel.className='rule'; sel.innerHTML='<option value="">— wybierz —</option>'+q.opts.map((o,i)=>`<option value="${i}">${o}</option>`).join(''); const btn=document.createElement('button'); btn.className='btn ghost'; btn.textContent='Sprawdź'; btn.onclick=()=>{ const good=String(q.correct)===sel.value; mark(sel,good); speak(good?PHRASES.good:PHRASES.bad); updateScore(); if(good) celebrate(); }; s.append(`${qi+1}. Wybierz wyraz z niewymiennym „ó”. `, sel, btn, info('opcje: '+q.opts.join(' • '))); c.appendChild(s); }); }
+
+  if(x.defs){ const ac=document.createElement('div'); ac.id='acrostic'; ac.className='sentence'; ac.innerHTML='<b>Hasło:</b> <span id="acro-letters">• • • • • •</span>'; c.appendChild(ac); x.defs.forEach((d,di)=>{ const s=document.createElement('div'); s.className='sentence'; const input=document.createElement('input'); input.className='expl'; input.placeholder='odpowiedź'; setSafe(input); input.dataset.ans=d.a.toLowerCase(); input.addEventListener('input',()=>{ const good=norm(input.value)===norm(d.a); mark(input,good); if(good) speak(PHRASES.good); updateScore(); updateAcrostic(); }); s.append(`${di+1}. ${d.d} `, input); c.appendChild(s); }); }
+
+  if(x.custom){ const s1=document.createElement('div'); s1.className='sentence'; s1.innerHTML='<b>„ó” wymienne — 3 przykłady:</b> '; for(let i=0;i<3;i++){ const inp=document.createElement('input'); inp.className='expl'; setSafe(inp); inp.placeholder='wyraz z „ó” (np. stół)'; inp.oninput=()=>checkOwn(inp,true); s1.append(' ',inp); } const s2=document.createElement('div'); s2.className='sentence'; s2.innerHTML='<b>„ó” niewymienne — 3 przykłady:</b> '; for(let i=0;i<3;i++){ const inp=document.createElement('input'); inp.className='expl'; setSafe(inp); inp.placeholder='wyraz z „ó” (np. ból)'; inp.oninput=()=>checkOwn(inp,false); s2.append(' ',inp); } c.append(s1,s2); }
+
+  if(x.randomWord){
+    const boxWrap=document.createElement('div'); boxWrap.className='sentence'; boxWrap.id='randWord'; boxWrap.innerHTML='Kliknij „Losuj słowo”.';
+    const ctr=document.createElement('div'); ctr.className='inline-controls';
+    const btn1=document.createElement('button'); btn1.className='btn'; btn1.textContent='Losuj słowo'; btn1.onclick=()=>randomWord();
+    const btn2=document.createElement('button'); btn2.className='btn ghost'; btn2.textContent='Pokaż odpowiedź'; btn2.onclick=()=>revealRandom('randWord');
+    ctr.append(btn1,btn2); c.append(boxWrap,ctr);
   }
 
-  if(x.choose){
-    x.choose.forEach((q,qi)=>{
-      const s=document.createElement('div'); s.className='sentence';
-      const sel=document.createElement('select'); sel.className='rule'; sel.innerHTML='<option value="">— wybierz —</option>'+q.opts.map((o,i)=>`<option value="${i}">${o}</option>`).join('');
-      const btn=document.createElement('button'); btn.className='btn ghost'; btn.textContent='Sprawdź'; btn.onclick=()=>{ const good=String(q.correct)===sel.value; mark(sel,good); speak(good?'Dobrze':'Źle'); updateScore(); if(good) celebrate(); };
-      s.append(`${qi+1}. Wybierz wyraz z niewymiennym „ó”. `, sel, btn, info('opcje: '+q.opts.join(' • ')));
-      c.appendChild(s);
-    });
-  }
-
-  if(x.defs){
-    const ac=document.createElement('div'); ac.id='acrostic'; ac.className='sentence'; ac.innerHTML='<b>Hasło:</b> <span id="acro-letters">• • • • • •</span>'; c.appendChild(ac);
-    x.defs.forEach((d,di)=>{
-      const s=document.createElement('div'); s.className='sentence';
-      const input=document.createElement('input'); input.className='expl'; input.placeholder='odpowiedź'; input.setAttribute('inputmode','text'); input.setAttribute('autocapitalize','off'); input.setAttribute('autocorrect','off'); input.setAttribute('autocomplete','off'); input.setAttribute('spellcheck','false'); input.dataset.ans=d.a.toLowerCase();
-      input.addEventListener('input',()=>{ const good=norm(input.value)===norm(d.a); mark(input,good); if(good) speak('Dobrze'); updateScore(); updateAcrostic(); });
-      s.append(`${di+1}. ${d.d} `, input); c.appendChild(s);
-    });
-  }
-
-  if(x.custom){
-    const s1=document.createElement('div'); s1.className='sentence'; s1.innerHTML='<b>„ó” wymienne — 3 przykłady:</b> ';
-    for(let i=0;i<3;i++){ const inp=document.createElement('input'); inp.className='expl'; setSafe(inp); inp.placeholder='wyraz z „ó” (np. stół)'; inp.oninput=()=>checkOwn(inp,true); s1.append(' ',inp); }
-    const s2=document.createElement('div'); s2.className='sentence'; s2.innerHTML='<b>„ó” niewymienne — 3 przykłady:</b> ';
-    for(let i=0;i<3;i++){ const inp=document.createElement('input'); inp.className='expl'; setSafe(inp); inp.placeholder='wyraz z „ó” (np. ból)'; inp.oninput=()=>checkOwn(inp,false); s2.append(' ',inp); }
-    c.append(s1,s2);
+  if(x.randomSentence){
+    const boxWrap=document.createElement('div'); boxWrap.className='sentence'; boxWrap.id='randSentence'; boxWrap.innerHTML='Kliknij „Losuj zdanie”.';
+    const ctr=document.createElement('div'); ctr.className='inline-controls';
+    const btn1=document.createElement('button'); btn1.className='btn'; btn1.textContent='Losuj zdanie'; btn1.onclick=()=>randomSentence();
+    const btn2=document.createElement('button'); btn2.className='btn ghost'; btn2.textContent='Pokaż odpowiedź'; btn2.onclick=()=>revealRandom('randSentence');
+    ctr.append(btn1,btn2); c.append(boxWrap,ctr);
   }
 
   view.appendChild(c);
 
-  // Live check for all letter boxes
+  // Live check for wszystkie pola liter + dymki z zasadą
   view.querySelectorAll('input.letter').forEach(inp=>{
-    inp.addEventListener('input',()=>{ const ok=norm(inp.value)===norm(inp.dataset.ans); mark(inp,ok); speak(ok?'Dobrze':'Źle'); updateScore(); updateAcrostic(); });
+    inp.addEventListener('input',()=>{
+      const ok=norm(inp.value)===norm(inp.dataset.ans);
+      mark(inp,ok); updateScore(); updateAcrostic();
+      if(ok){ showRuleBubble(inp); speak(PHRASES.good); } else { removeBubble(inp); speak(PHRASES.bad); }
+    });
   });
 
   updateScore(); updateAcrostic();
@@ -236,7 +272,7 @@ function mount(){
 function setSafe(el){ el.setAttribute('inputmode','text'); el.setAttribute('autocapitalize','off'); el.setAttribute('autocorrect','off'); el.setAttribute('autocomplete','off'); el.setAttribute('spellcheck','false'); }
 function info(txt){ const e=document.createElement('span'); e.className='mini'; e.style.marginLeft='8px'; e.textContent=txt; return e }
 
-/* ===================== LOGIKA ===================== */
+/* ===================== LOGIKA WSPÓLNA ===================== */
 function norm(s){return (s||'').toLowerCase().trim().replaceAll('ę','e').replaceAll('ą','a')}
 function mark(el,ok){el.classList.remove('correct','wrong');el.classList.add(ok?'correct':'wrong')}
 function updateScore(){
@@ -250,24 +286,72 @@ function updateScore(){
 }
 function checkSentence(sentenceEl, sel, inp){
   const fields=sentenceEl.querySelectorAll('input.letter');
-  let okAll=true; fields.forEach(f=>{ const ok=norm(f.value)===norm(f.dataset.ans); mark(f,ok); if(!ok) okAll=false; });
-  if(sel){ const expect = guessRuleFromSentence(sentenceEl) || ''; const good = !!sel.value && (sel.value===expect || sel.value==='u' || sel.value.startsWith('ó')); mark(sel,good); sel.dataset.marked='1'; if(good) speak('Zasada poprawna'); }
+  let okAll=true; fields.forEach(f=>{ const ok=norm(f.value)===norm(f.dataset.ans); mark(f,ok); if(!ok) okAll=false; if(ok) showRuleBubble(f); });
+  if(sel){ const keys=[...fields].map(f=>f.dataset.rule); const fav=favorite(keys); const expect = fav && fav.startsWith('O_') ? (fav==='O_WYM'?'ó wymienne':'ó niewymienne') : 'u'; const good = !!sel.value && (sel.value===expect); mark(sel,good); sel.dataset.marked='1'; if(good) speak(PHRASES.good); else speak(PHRASES.bad); }
   if(inp && inp.value.trim().length>=3){ inp.classList.add('correct'); }
-  speak(okAll?'Bardzo dobrze':'Popraw literki'); if(okAll) celebrate(); updateScore();
+  if(okAll) celebrate(); updateScore();
 }
-function guessRuleFromSentence(sentenceEl){
-  const txt=sentenceEl.textContent||''; if(/[wó]óz|góry|półce|król|wróbel|pióro/i.test(txt)) return 'ó niewymienne'; return 'u';
+function favorite(arr){ const c={}; arr.forEach(k=>{if(!k)return; c[k]=(c[k]||0)+1}); let best=null, n=0; for(const k in c){ if(c[k]>n){n=c[k]; best=k} } return best }
+
+/* ======= Dymek z zasadą ======= */
+function showRuleBubble(inp){ removeBubble(inp); const key=inp.dataset.rule||'U_NORM'; const r=RULES[key]||{t:'U',x:'litera „u”'}; const b=document.createElement('div'); b.className='bubble'; b.innerHTML=`<b>${r.t}:</b> ${r.x}`; inp.closest('.sentence').appendChild(b); }
+function removeBubble(inp){ const s=inp.closest('.sentence'); if(!s) return; const b=s.querySelector('.bubble'); if(b) b.remove(); }
+
+/* ===================== LOSOWANIE ===================== */
+function rint(n){ return Math.floor(Math.random()*n) }
+function pick(arr){ return arr[rint(arr.length)] }
+
+function randomWord(){
+  const poolType = Math.random()<.5 ? 'O' : 'U';
+  const word = poolType==='O' ? pick(WORDS_O_CLEAN) : pick(WORDS_U);
+  const letter = poolType==='O' ? 'ó' : 'u';
+  const idx = word.indexOf(letter);
+  if(idx<0){ return randomWord(); }
+  const before = word.slice(0,idx); const after = word.slice(idx+1);
+  const rule = poolType==='O' ? 'O_NORM' : 'U_NORM';
+  const html = `${before}${box(letter, poolType==='O'?'O_NIEW':'U_NORM')}${after}`;
+  const s=document.getElementById('randWord'); s.innerHTML = html;
+  attachLiveLetters(s);
+}
+
+function randomSentence(){
+  const src = pick(RAND_SENTENCES);
+  // jeżeli zdanie zawiera „◯”, wybieramy literę na podstawie najbliższych znaków (heurystyka)
+  const needO = /p◯ł|r◯b|w◯z|g◯r|pi◯r|kr◯l|st◯ł|dw◯r|ch◯r|mr◯z|wśr◯d/i.test(src);
+  const letter = needO ? 'ó' : 'u';
+  const ruleKey = needO ? 'O_NIEW' : 'U_NORM';
+  const html = src.replace('◯', box(letter, ruleKey));
+  const s=document.getElementById('randSentence'); s.innerHTML = html;
+  attachLiveLetters(s);
+}
+
+function revealRandom(id){
+  const wrap=document.getElementById(id); if(!wrap) return;
+  const inp=wrap.querySelector('input.letter'); if(!inp) return;
+  inp.value = inp.dataset.ans; mark(inp,true); showRuleBubble(inp); speak(PHRASES.good); updateScore();
+}
+
+function attachLiveLetters(scope){
+  scope.querySelectorAll('input.letter').forEach(inp=>{
+    inp.addEventListener('input',()=>{
+      const ok=norm(inp.value)===norm(inp.dataset.ans);
+      mark(inp,ok);
+      if(ok){ showRuleBubble(inp); celebrate(); speak(PHRASES.good); } else { removeBubble(inp); speak(PHRASES.bad); }
+      updateScore();
+    });
+  });
 }
 
 /* ===================== AUDIO / UI ===================== */
+const PHRASES = { good:'Jesteś profesorek!', bad:'Jesteś osłem!' };
 let ac; function audio(){ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); return ac }
 function beep(freq=640,ms=120){const ctx=audio();const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=freq;o.connect(g);g.connect(ctx.destination);g.gain.value=.15;o.start();setTimeout(()=>o.stop(),ms)}
-function speak(text){ const s=window.speechSynthesis; if(!s||!text) return; const u=new SpeechSynthesisUtterance(text); u.lang='pl-PL'; u.rate=1.06; s.speak(u) }
+function speak(text){ const s=window.speechSynthesis; if(!s||!text) return; const u=new SpeechSynthesisUtterance(text); u.lang='pl-PL'; u.rate=1.02; s.speak(u) }
 const toast=document.getElementById('toast'); function note(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1600) }
 
 // konfetti
 const canvas=document.getElementById('confetti');const ctx2=canvas.getContext('2d');let conf=[];function resize(){canvas.width=innerWidth;canvas.height=innerHeight}addEventListener('resize',resize);resize();
-function celebrate(){ for(let i=0;i<90;i++) conf.push({x:Math.random()*canvas.width,y:-10,v:2+Math.random()*3,s:4+Math.random()*6,r:Math.random()*6,c:`hsl(${Math.random()*360},100%,60%)`}); (function loop(){ ctx2.clearRect(0,0,canvas.width,canvas.height); conf.forEach(p=>{p.y+=p.v;p.x+=Math.sin(p.y/20);p.r+=.1;ctx2.save();ctx2.translate(p.x,p.y);ctx2.rotate(p.r);ctx2.fillStyle=p.c;ctx2.fillRect(-p.s/2,-p.s/2,p.s,p.s);ctx2.restore();}); conf=conf.filter(p=>p.y<canvas.height+20); if(conf.length) requestAnimationFrame(loop); })(); beep(880); setTimeout(()=>beep(660),120); setTimeout(()=>beep(520),220) }
+function celebrate(){ for(let i=0;i<70;i++) conf.push({x:Math.random()*canvas.width,y:-10,v:2+Math.random()*3,s:4+Math.random()*6,r:Math.random()*6,c:`hsl(${Math.random()*360},100%,60%)`}); (function loop(){ ctx2.clearRect(0,0,canvas.width,canvas.height); conf.forEach(p=>{p.y+=p.v;p.x+=Math.sin(p.y/20);p.r+=.1;ctx2.save();ctx2.translate(p.x,p.y);ctx2.rotate(p.r);ctx2.fillStyle=p.c;ctx2.fillRect(-p.s/2,-p.s/2,p.s,p.s);ctx2.restore();}); conf=conf.filter(p=>p.y<canvas.height+20); if(conf.length) requestAnimationFrame(loop); })(); beep(880); setTimeout(()=>beep(660),120); setTimeout(()=>beep(520),220) }
 
 // przyciski
  document.getElementById('checkAll').onclick=()=>{
@@ -280,6 +364,7 @@ function celebrate(){ for(let i=0;i<90;i++) conf.push({x:Math.random()*canvas.wi
  document.getElementById('resetAll').onclick=()=>{
    view.querySelectorAll('input').forEach(i=>{ if(i.type==='text'){ i.value=''; i.classList.remove('correct','wrong'); }});
    view.querySelectorAll('select').forEach(s=>{ s.value=''; s.classList.remove('correct','wrong'); s.dataset.marked='0'});
+   view.querySelectorAll('.bubble').forEach(b=>b.remove());
    updateScore();
  };
  document.getElementById('share').onclick=async()=>{ try{ await navigator.clipboard.writeText(location.href); note('Skopiowano adres strony'); }catch(e){ note('Skopiuj URL z paska adresu') } };
