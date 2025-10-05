@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ortografia: ó czy u? — Interaktywna apka</title>
+  <style>
+    :root{
+      --bg:#0f1020; --card:#17182e; --accent:#7c4dff; --accent2:#00e5ff; --ok:#00c853; --bad:#ff5252; --text:#eef1ff; --muted:#9aa0c3;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell; background: radial-gradient(1200px 800px at 20% -10%, #1b1d3a, transparent),radial-gradient(900px 700px at 110% 10%, #14223a, transparent), var(--bg); color:var(--text)}
+    a{color:var(--accent2)}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px}
+    header{display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom:18px}
+    .title{display:flex; gap:14px; align-items:center}
+    .logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#ff6ec7); box-shadow:var(--shadow); display:grid; place-items:center; font-weight:800}
+    .logo span{filter:drop-shadow(0 3px 6px rgba(0,0,0,.4))}
+    .badge{font-size:12px; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg,var(--accent) ,var(--accent2)); color:#000; font-weight:700}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; box-shadow:var(--shadow)}
+
+    .tabs{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 18px}
+    .tab{cursor:pointer; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#121329; color:var(--muted); font-weight:700}
+    .tab.active{background:linear-gradient(90deg, rgba(124,77,255,.25), rgba(0,229,255,.25)); color:var(--text); border-color:transparent}
+
+    .grid{display:grid; gap:14px}
+    @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr}} 
+
+    h2{margin:0 0 8px; font-size:22px}
+    h3{margin:8px 0 8px; font-size:18px; color:#cfd3ff}
+    p.muted{color:var(--muted); margin:6px 0 14px}
+
+    .item{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px}
+    .controls{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent2)); border:none; color:#000; font-weight:800; padding:10px 14px; border-radius:12px; cursor:pointer}
+    .btn.ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.15)}
+
+    .q{display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:12px; background:#101225; border:1px solid rgba(255,255,255,.08); margin:8px 0}
+    .q label{flex:1}
+    input[type="text"], select{background:#0e1022; border:1px solid rgba(255,255,255,.15); color:var(--text); padding:10px 12px; border-radius:10px; width:100%}
+    .pill{display:inline-block; padding:4px 10px; border-radius:999px; background:#0f1530; border:1px solid rgba(255,255,255,.1); color:#a7b0ff; font-size:12px; margin-left:4px}
+    .ok{outline:2px solid var(--ok)}
+    .bad{outline:2px solid var(--bad)}
+
+    .score{display:flex; gap:12px; align-items:center}
+    .score .circle{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#10142a;border:1px solid rgba(255,255,255,.12); font-weight:900}
+
+    details{margin-top:6px}
+    summary{cursor:pointer; color:#a2e7ff}
+
+    footer{margin-top:26px; color:var(--muted); text-align:center}
+    .small{font-size:12px}
+
+    .toast{position:fixed; right:14px; bottom:14px; background:#10122a; color:#fff; border:1px solid rgba(255,255,255,.2); padding:12px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; transform:translateY(10px); transition:.3s}
+    .toast.show{opacity:1; transform:translateY(0)}
+
+    /* mini-konfetti */
+    #confetti{position:fixed; inset:0; pointer-events:none}
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="logo"><span>Ó/U</span></div>
+        <div>
+          <h1 style="margin:0">Ortografia: <span style="color:#a0c3ff">„ó”</span> czy <span style="color:#a0ffe1">„u”</span>?</h1>
+          <div class="small">Kolorowa, multimedialna apka edukacyjna — działa offline, idealna na GitHub Pages.</div>
+        </div>
+      </div>
+      <div class="score card">
+        <div class="circle" id="score">0</div>
+        <div>
+          <div><strong>Wynik</strong> / możliwe: <span id="maxScore">0</span></div>
+          <div class="small">Kliknij „Sprawdź wszystko”, aby zobaczyć rezultat.</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="tabs" id="tabs"></div>
+      <div id="views"></div>
+      <div class="controls" style="margin-top:14px">
+        <button class="btn" id="checkAll">Sprawdź wszystko</button>
+        <button class="btn ghost" id="resetAll">Reset</button>
+        <button class="btn ghost" id="share">Udostępnij</button>
+      </div>
+    </div>
+
+    <footer>
+      <p class="small">Made with ❤ — możesz swobodnie kopiować i publikować. Najlepiej wrzuć plik na <strong>GitHub Pages</strong>.</p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Zapisano do schowka!</div>
+
+  <script>
+    // --- Dane zadań ---------------------------------------------------------
+    const tasks = [
+      {
+        id:'uzupelnij',
+        title:'Ćw. 1 — Uzupełnij wyrazy',
+        intro:'Uzupełnij luki „ó/u”. Zasada: ó — gdy się <em>wymienia</em> (stół → stoły), gdy <em>niewymienne</em> — trzeba zapamiętać; u — w pozostałych wypadkach.',
+        items:[
+          { q:'Na p…łce stoją książki.', a:'półce' },
+          { q:'Wr…bel usiadł na balkonie.', a:'wróbel' },
+          { q:'Nadchodzi b…rza.', a:'burza' },
+          { q:'Kr…l wygłosił mowę.', a:'król' },
+          { q:'Ola mal…je płot.', a:'maluje' },
+          { q:'Zgubiłem kl…cz do bramy.', a:'klucz' },
+          { q:'To bardzo d…gi kabel.', a:'długi' },
+          { q:'Na podwórzu stoi stary w…z.', a:'wóz' },
+          { q:'Z tej g…ry widać jezioro.', a:'góry' },
+          { q:'Ptak ma lekkie pi…ro.', a:'pióro' }
+        ]
+      },
+      {
+        id:'wybor',
+        title:'Ćw. 2 — Wybierz wyraz',
+        intro:'Wskaż wyraz, w którym „ó” jest <strong>niewymienne</strong>.',
+        pick:true,
+        items:[
+          { opts:['stół','ból','wóz','sowa'], correct:1 }, // ból
+          { opts:['wózek','córka','król','sól'], correct:3 }, // sól
+          { opts:['wróbel','góra','miód','stół'], correct:2 }, // miód (ó → o? nie; to ó w "miód" wymienia się: miody -> o! ups), poprawmy: niewymienne będzie "wróbel"? wróbel wymienia się na wrab? nie; wróbel → wróble (ó nie wymienia).
+        ]
+      },
+      {
+        id:'zasada',
+        title:'Ćw. 3 — Dopisz zasadę',
+        intro:'Wstaw „ó/u” i wybierz zasadę: <span class="pill">wymienne</span> lub <span class="pill">niewymienne</span>.',
+        rule:true,
+        items:[
+          { base:'p…źno', a:'późno', rule:'niewymienne' },
+          { base:'dr…ga', a:'droga', rule:'u' },
+          { base:'k…ra (ptak)', a:'kura', rule:'u' },
+          { base:'str…m', a:'strum', rule:'u' },
+          { base:'w…da', a:'woda', rule:'u' },
+          { base:'p…łka', a:'półka', rule:'wymienne' },
+          { base:'r…żowy', a:'różowy', rule:'wymienne' },
+          { base:'sp…źnić się', a:'spóźnić się', rule:'niewymienne' },
+          { base:'mr…czek', a:'mruczek', rule:'u' },
+          { base:'chm…ra', a:'chmura', rule:'u' }
+        ]
+      },
+      {
+        id:'haslo',
+        title:'Ćw. 4 — Hasło (mini‑krzyżówka)',
+        intro:'Uzupełnij definicje. Pierwsze litery utworzą hasło.',
+        acrostic:true,
+        items:[
+          { d:'Zespół śpiewaków.', a:'chór' },
+          { d:'To, co dostaje niegrzeczne dziecko od Mikołaja.', a:'rózga' },
+          { d:'Czas poprzedzający noc.', a:'wieczór' },
+          { d:'Miejsce na książki lub ubrania.', a:'półka' },
+          { d:'Wypowiadać się, posługiwać słowami.', a:'mówić' },
+        ],
+        solution:'CHWPM' // tylko kontrolne
+      }
+    ];
+
+    // Poprawka zestawu zadań 2 (niewymienne)
+    tasks[1].items = [
+      { opts:['stół','ból','wóz','sowa'], correct:1 },  // ból
+      { opts:['wózek','córka','król','sól'], correct:3 }, // sól
+      { opts:['wróbel','góra','miód','stół'], correct:0 } // wróbel (niewymienne)
+    ];
+
+    // --- UI budowa ----------------------------------------------------------
+    const tabs = document.getElementById('tabs');
+    const views = document.getElementById('views');
+    const toast = document.getElementById('toast');
+    const scoreEl = document.getElementById('score');
+    const maxScoreEl = document.getElementById('maxScore');
+
+    let current = 0;
+
+    function el(tag, attrs={}, ...children){
+      const e = document.createElement(tag);
+      Object.entries(attrs).forEach(([k,v])=>{
+        if(k==='class') e.className=v; else if(k==='html') e.innerHTML=v; else e.setAttribute(k,v)
+      });
+      children.forEach(c=> e.append(c));
+      return e;
+    }
+
+    function build(){
+      tabs.innerHTML = '';
+      views.innerHTML = '';
+
+      let max=0;
+      tasks.forEach((t,i)=>{
+        const tab = el('button',{class:'tab'+(i===current?' active':''), 'data-i':i}, t.title);
+        tab.addEventListener('click',()=>{current=i; build()});
+        tabs.append(tab);
+
+        const view = el('div',{class:'item'});
+        view.append(el('h2',{}, t.title));
+        view.append(el('p',{class:'muted', html:t.intro}));
+
+        if(t.id==='uzupelnij'){
+          t.items.forEach((it,idx)=>{
+            max++;
+            const q = el('div',{class:'q'});
+            const input = el('input',{type:'text','data-ans':it.a.toLowerCase(), placeholder:it.q.replace('…','_')});
+            const lab = el('label',{}, (idx+1)+'. '+it.q);
+            q.append(lab,input);
+            view.append(q);
+          });
+        }
+        if(t.id==='wybor'){
+          t.items.forEach((it,idx)=>{
+            max++;
+            const q = el('div',{class:'q'});
+            const lab = el('label',{}, (idx+1)+'. Zaznacz wyraz z niewymiennym „ó”.');
+            const sel = el('select',{'data-ans':it.correct});
+            sel.append(el('option',{value:''},'— wybierz —'));
+            it.opts.forEach((o,oi)=> sel.append(el('option',{value:String(oi)}, o)) );
+            q.append(lab, sel);
+            const optsTxt = el('div',{class:'small', html:'<em>opcje:</em> '+it.opts.join(' • ')});
+            q.append(optsTxt);
+            view.append(q);
+          });
+        }
+        if(t.id==='zasada'){
+          t.items.forEach((it,idx)=>{
+            max+=2; // 1 pkt za wyraz + 1 za zasadę
+            const q = el('div',{class:'q'});
+            const lab = el('label',{}, (idx+1)+'. '+it.base);
+            const input = el('input',{type:'text','data-ans':it.a.toLowerCase(), style:'max-width:260px'});
+            const sel = el('select',{'data-ans':it.rule});
+            sel.append(el('option',{value:''},'— zasada —'));
+            ['wymienne','niewymienne','u'].forEach(r=> sel.append(el('option',{value:r}, r)) );
+            q.append(lab,input,sel);
+            view.append(q);
+          });
+        }
+        if(t.id==='haslo'){
+          const list = el('div',{});
+          t.items.forEach((it,idx)=>{
+            max++;
+            const q = el('div',{class:'q'});
+            const lab = el('label',{}, (idx+1)+'. '+it.d);
+            const input = el('input',{type:'text','data-ans':it.a.toLowerCase(), placeholder:'odpowiedź'});
+            q.append(lab,input);
+            list.append(q);
+          });
+          const reveal = el('div',{class:'muted', id:'acrostic'});
+          view.append(list, reveal);
+        }
+
+        views.append(view);
+      });
+
+      maxScoreEl.textContent = max;
+      updateAcrostic();
+    }
+
+    // --- Sprawdzanie --------------------------------------------------------
+    function checkAll(){
+      let pts=0, max=0;
+      document.querySelectorAll('input[type="text"]').forEach(inp=>{
+        const ans = (inp.getAttribute('data-ans')||'').trim();
+        if(!ans) return; max++;
+        const good = normalize(inp.value) === normalize(ans);
+        mark(inp, good); if(good) pts++;
+      });
+      document.querySelectorAll('select').forEach(sel=>{
+        const ans = sel.getAttribute('data-ans');
+        if(ans===null) return; max++;
+        const good = sel.value === ans;
+        mark(sel, good); if(good) pts++;
+      });
+      scoreEl.textContent = pts;
+      maxScoreEl.textContent = max;
+      if(pts===max && max>0){ celebrate(); note('Perfect! 🎉'); }
+      else if(max>0){ beep(420); note('Sprawdzone!'); }
+      updateAcrostic();
+    }
+
+    function resetAll(){
+      document.querySelectorAll('input[type="text"]').forEach(i=>{i.value=''; i.classList.remove('ok','bad')});
+      document.querySelectorAll('select').forEach(s=>{s.value=''; s.classList.remove('ok','bad')});
+      scoreEl.textContent = '0';
+      beep(300);
+      updateAcrostic();
+    }
+
+    function mark(elm, ok){
+      elm.classList.remove('ok','bad');
+      elm.classList.add(ok?'ok':'bad');
+    }
+
+    function normalize(s){
+      return (s||'').toLowerCase().replaceAll('ę','e').replaceAll('ą','a').trim();
+    }
+
+    // --- Udostępnianie / kopiowanie linku ----------------------------------
+    document.getElementById('share').addEventListener('click', async ()=>{
+      const txt = 'Skopiuj / wklej ten plik na GitHub Pages, aby udostępnić apkę.';
+      try{
+        await navigator.clipboard.writeText(window.location.href);
+        note('Skopiowano adres strony do schowka.');
+      }catch(e){ note(txt); }
+    });
+
+    // --- Akrostych (hasło) --------------------------------------------------
+    function updateAcrostic(){
+      const container = document.getElementById('acrostic');
+      if(!container) return;
+      const ins = [...views.querySelectorAll('[data-ans]')].filter(n=> n.closest('.item').querySelector('#acrostic'));
+      const firsts = [];
+      const block = views.querySelector('#acrostic').closest('.item');
+      const inputs = block.querySelectorAll('input[type="text"]');
+      inputs.forEach(i=>{
+        const val = i.value.trim();
+        firsts.push( (val?val[0]:'•').toUpperCase() );
+      });
+      container.innerHTML = `<h3>Hasło: <span style="letter-spacing:.22em">${firsts.join(' ')}</span></h3>`;
+    }
+
+    // --- Audio: prosty beep -------------------------------------------------
+    let ac; function audio(){ if(!ac) ac = new (window.AudioContext||window.webkitAudioContext)(); return ac }
+    function beep(freq=600, ms=140){
+      const ctx = audio();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value=freq; o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(.001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.2, ctx.currentTime+.02);
+      o.start();
+      setTimeout(()=>{ g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime+.05); o.stop(ctx.currentTime+.06); }, ms);
+    }
+
+    // --- Konfetti -----------------------------------------------------------
+    const canvas = document.getElementById('confetti');
+    const ctx2 = canvas.getContext('2d');
+    let conf = [];
+    function resize(){ canvas.width = innerWidth; canvas.height = innerHeight }
+    addEventListener('resize', resize); resize();
+    function celebrate(){
+      for(let i=0;i<140;i++) conf.push({x:Math.random()*canvas.width, y:-10, v:2+Math.random()*4, s:4+Math.random()*8, r:Math.random()*6, c:`hsl(${Math.random()*360},100%,60%)`});
+      (function loop(){
+        ctx2.clearRect(0,0,canvas.width,canvas.height);
+        conf.forEach(p=>{ p.y+=p.v; p.x+=Math.sin(p.y/20); p.r+=.1; ctx2.save(); ctx2.translate(p.x,p.y); ctx2.rotate(p.r); ctx2.fillStyle=p.c; ctx2.fillRect(-p.s/2,-p.s/2,p.s,p.s); ctx2.restore(); });
+        conf = conf.filter(p=> p.y < canvas.height+20);
+        if(conf.length) requestAnimationFrame(loop);
+      })();
+      beep(880); setTimeout(()=>beep(660),120); setTimeout(()=>beep(520),220);
+    }
+
+    // --- Toast --------------------------------------------------------------
+    function note(msg){ const t=toast; t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1800) }
+
+    // --- Akcja przycisków ---------------------------------------------------
+    document.getElementById('checkAll').addEventListener('click', checkAll);
+    document.getElementById('resetAll').addEventListener('click', resetAll);
+
+    build();
+  </script>
+</body>
+</html>
